@@ -33,11 +33,20 @@
             /* 垂直对齐底部 */
         }
 
-        .grid-item img {
-            max-width:100%;
-            max-height:100%;
-            /* 图片需要事先统一高度和比例 */
-            padding: 30px;
+        .img-item {
+            display: grid;
+            place-items: center;
+            /* 水平和垂直居中 */
+            height: 100%;
+            /* 确保容器有高度 */
+        
+        
+        }
+
+        .img-item img {
+            max-width: 100%;
+            max-height: 100%;
+            margin-left: 100px;/* 定义图像左侧留白 */
         }
 
         .logo-item {
@@ -150,7 +159,7 @@
             <hr>
             <p>
         </div>
-        <div class="grid-item">
+        <div class="img-item">
             <img id="currentImage" src="images/0.jpg" alt="pic" />
         </div>
         <div class="grid-item">
@@ -304,10 +313,10 @@
     var images = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg'];
     var titles = ['LOT 001', 'LOT 002', 'LOT 003', 'LOT 004'];
     var names = ['张好好诗卷', '伯远帖', '齐璜棕树蝈蝈图轴', '螺鈿紫檀琵琶'];
-    var authors = ['[唐]杜牧', '[晋]王珣', '齐璜','唐代'];
-    var types = ['书法', '书法', '纸本水墨','乐器'];
-    var sizes = ['28.2*162cm', '25.1*17.2cm', '69.5*34.3cm','全長99.6cm'];
-    var prices = ['300000', '50000000', '50000','200000'];
+    var authors = ['[唐]杜牧', '[晋]王珣', '齐璜', '唐代'];
+    var types = ['书法', '书法', '纸本水墨', '乐器'];
+    var sizes = ['28.2*162cm', '25.1*17.2cm', '69.5*34.3cm', '全長99.6cm'];
+    var prices = ['300000', '50000000', '50000', '200000'];
 
     var currentImageIndex = -1; // 当前图片的索引
 
