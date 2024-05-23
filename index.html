@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>山东财经大学艺术品拍卖会</title> <!--可以修改-->
+    <style>
+        body {
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #9A9696;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+
+            grid-template-rows: auto;
+            /* 行高根据内容自动调整 */
+            gap: 0px;
+            /* 网格项之间的间隙 */
+        }
+
+        .grid-item {
+            /* 可以为网格项添加一些样式，比如背景颜色可改 */
+            background-color: #9A9696;
+            color: white;
+            padding: 0px;
+            text-align: center;
+            justify-content: flex-end;
+            /* 垂直对齐底部 */
+        }
+
+        .grid-item img {
+            max-width:100%;
+            max-height:100%;
+            /* 图片需要事先统一高度和比例 */
+            padding: 30px;
+        }
+
+        .logo-item {
+            display: flex;
+            /* 使用Flexbox布局 */
+            align-items: center;
+            /* 确保子元素在交叉轴上居中对齐 */
+            gap: 10px;
+            /* 图片和标题之间的间距 */
+        }
+
+        .logo-item img {
+            height: 100px;
+            /* 设置图片高度 */
+            width: 100px;
+            /* 设置图片宽度 */
+            padding: 0px;
+        }
+
+        .grid-item h1 {
+            margin: 0;
+            font-size: 60px;
+            /* 移除标题的默认外边距 */
+
+        }
+
+        .grid-item h2 {
+            margin: 0;
+            font-size: 25px;
+            /* 移除标题的默认外边距 */
+
+        }
+
+        .grid-item h3 {
+            margin: 0;
+            font-size: 20px;
+            /* 移除标题的默认外边距 */
+
+        }
+
+        .grid-item h4 {
+            margin: 0;
+            font-size: 30px;
+            /* 移除标题的默认外边距 */
+
+        }
+
+        .grid-item h5 {
+            margin: 0;
+            font-size: 20px;
+            /* 移除标题的默认外边距 */
+            font-family: "Courier New", Courier, monospace;
+
+        }
+
+        table {
+            text-align: left;
+            padding: 60px;
+        }
+
+        table td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        .transparent-input {
+            width: 200px;
+            font-size: 30px;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            color: white;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+            text-align: left;
+            font-weight: bold;
+        }
+
+        #reportDiv {
+            display: none;
+            background-color: #f0f0f0;
+            margin: 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="grid-container">
+        <div class="grid-item">
+            <div class="logo-item">
+
+                <img src="images/logo.jpg" alt="Logo" /><!--可以修改-->
+                <h1>山东财经大学艺术学院</h1><!--可以修改-->
+
+            </div>
+
+        </div>
+        <div class="grid-item"><br>
+            <h2>
+                <div id="clock"></div>
+            </h2>
+            <h2>震古烁今-2024年艺术品拍卖会</h2><!--可以修改-->
+
+        </div>
+
+        <div class="grid-item">
+            <hr>
+        </div>
+        <div class="grid-item">
+            <hr>
+            <p>
+        </div>
+        <div class="grid-item">
+            <img id="currentImage" src="images/0.jpg" alt="pic" />
+        </div>
+        <div class="grid-item">
+            <div>
+                <table border="0">
+                    <tr>
+                        <td>
+                            <h4><label id="currentTitle">LOT </label></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4><label id="currentName">名称 </label></h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>作者：<label id="currentAuthor"> </label></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>材质：<label id="currentType"> </label></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h3>尺寸：<label id="currentSize"> </label></h3>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <hr>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5>RMB：<input type="text" id="numberDiv-RMB" oninput="updateRMB()"
+                                    class="transparent-input"> </h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5>HKD： <label id="numberDiv-HKD"> </label></h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5>USD： <label id="numberDiv-USD"> </label></h5>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h5>EUR： <label id="numberDiv-EUR"> </label></h5>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="reportDiv">
+
+        <table id="artworkTable" width="80%">
+            <thead>
+                <tr>
+                    <th>LOT编号</th>
+                    <th>名称</th>
+                    <th>作者</th>
+                    <th>类型</th>
+                    <th>尺寸</th>
+                    <th>价格</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 表格行将通过JavaScript动态生成 -->
+            </tbody>
+        </table>
+
+    </div>
+</body>
+<script>
+    function auction258(number) {
+        // 将数字转换为字符串
+        const strNumber = String(number);
+        if (number >= 0 && number < 1000) {
+            if (number == 0) { return 20; }
+            if (number == 20) { return 30; }
+            if (number == 50) { return 30; }
+            if (number == 80) { return 20; }
+            if (strNumber.length >= 3 && strNumber.endsWith('00')) { return 20; }
+            if (strNumber.length >= 3 && strNumber.endsWith('20')) { return 30; }
+            if (strNumber.length >= 3 && strNumber.endsWith('50')) { return 30; }
+            if (strNumber.length >= 3 && strNumber.endsWith('80')) { return 20; }
+        }
+        if (number >= 1000 && number < 10000) {
+            if (number == 1000) { return 200; }
+            if (strNumber.length >= 4 && strNumber.endsWith('000')) { return 200; }
+            if (strNumber.length >= 4 && strNumber.endsWith('200')) { return 300; }
+            if (strNumber.length >= 4 && strNumber.endsWith('500')) { return 300; }
+            if (strNumber.length >= 4 && strNumber.endsWith('800')) { return 200; }
+        }
+        if (number >= 10000 && number < 100000) {
+            if (number == 10000) { return 2000; }
+            if (strNumber.length >= 5 && strNumber.endsWith('0000')) { return 2000; }
+            if (strNumber.length >= 5 && strNumber.endsWith('2000')) { return 3000; }
+            if (strNumber.length >= 5 && strNumber.endsWith('5000')) { return 3000; }
+            if (strNumber.length >= 5 && strNumber.endsWith('8000')) { return 2000; }
+        }
+
+        if (number >= 100000 && number < 1000000) {
+            if (number == 100000) { return 20000; }
+            if (strNumber.length >= 6 && strNumber.endsWith('00000')) { return 20000; }
+            if (strNumber.length >= 6 && strNumber.endsWith('20000')) { return 30000; }
+            if (strNumber.length >= 6 && strNumber.endsWith('50000')) { return 30000; }
+            if (strNumber.length >= 6 && strNumber.endsWith('80000')) { return 20000; }
+        }
+        if (number >= 1000000 && number < 10000000) {
+            if (number == 100000) { return 20000; }
+            if (strNumber.length >= 7 && strNumber.endsWith('000000')) { return 200000; }
+            if (strNumber.length >= 7 && strNumber.endsWith('200000')) { return 300000; }
+            if (strNumber.length >= 7 && strNumber.endsWith('500000')) { return 300000; }
+            if (strNumber.length >= 7 && strNumber.endsWith('800000')) { return 200000; }
+        }
+        if (number >= 10000000 && number < 100000000) {
+            if (number == 100000) { return 20000; }
+            if (strNumber.length >= 8 && strNumber.endsWith('0000000')) { return 2000000; }
+            if (strNumber.length >= 8 && strNumber.endsWith('2000000')) { return 3000000; }
+            if (strNumber.length >= 8 && strNumber.endsWith('5000000')) { return 3000000; }
+            if (strNumber.length >= 8 && strNumber.endsWith('8000000')) { return 2000000; }
+        }
+        return 100;
+    }
+
+
+    // 获取div元素
+    var numberDivRMB = document.getElementById('numberDiv-RMB');
+    var numberDivHKD = document.getElementById('numberDiv-HKD');
+    var numberDivUSD = document.getElementById('numberDiv-USD');
+    var numberDivEUR = document.getElementById('numberDiv-EUR');
+    // 获取当前图片的DOM元素
+    var currentImage = document.getElementById('currentImage');
+    var currenttitle = document.getElementById('currentTitle');
+    var currentname = document.getElementById('currentName');
+    var currentauthor = document.getElementById('currentAuthor');
+    var currenttype = document.getElementById('currentType');
+    var currentsize = document.getElementById('currentSize');
+    var currentprice = document.getElementById('currentPrice');
+
+    // 定义一个数组来存储路径
+    var images = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg', 'images/4.jpg'];
+    var titles = ['LOT 001', 'LOT 002', 'LOT 003', 'LOT 004'];
+    var names = ['张好好诗卷', '伯远帖', '齐璜棕树蝈蝈图轴', '螺鈿紫檀琵琶'];
+    var authors = ['[唐]杜牧', '[晋]王珣', '齐璜','唐代'];
+    var types = ['书法', '书法', '纸本水墨','乐器'];
+    var sizes = ['28.2*162cm', '25.1*17.2cm', '69.5*34.3cm','全長99.6cm'];
+    var prices = ['300000', '50000000', '50000','200000'];
+
+    var currentImageIndex = -1; // 当前图片的索引
+
+
+    function updateRMB() {
+        var currentNumberRMB = parseInt(numberDivRMB.value, 10);
+
+        // 检查转换后的数字是否为有效数字
+        if (!isNaN(currentNumberRMB)) {
+            // 更新div的内容
+            numberDivRMB.value = currentNumberRMB;
+            prices[currentImageIndex] = currentNumberRMB;
+            numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
+            numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
+            numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
+        }
+
+    }
+    // 监听键盘事件
+    document.addEventListener('keydown', function (event) {
+        switch (event.key) {
+            case 'ArrowUp':
+                if (currentImageIndex == -1) break;
+                // 处理上箭头键的逻辑
+                // 读取当前div的内容，并转换为数字
+                var currentNumberRMB = parseInt(numberDivRMB.value, 10);
+
+                // 检查转换后的数字是否为有效数字
+                if (!isNaN(currentNumberRMB)) {
+                    // 增加100
+                    currentNumberRMB += auction258(currentNumberRMB);
+
+                    // 更新div的内容
+                    numberDivRMB.value = currentNumberRMB;
+                    prices[currentImageIndex] = currentNumberRMB;
+                    numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
+                    numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
+                    numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
+                }
+                break;
+            case 'ArrowDown':
+
+                break;
+            case 'ArrowLeft':
+                // 处理左箭头键的逻辑
+                // 切换到上一张图片
+                currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+                currentImage.src = images[currentImageIndex];
+                currenttitle.textContent = titles[currentImageIndex];
+                currentname.textContent = names[currentImageIndex];
+                currentauthor.textContent = authors[currentImageIndex];
+                currenttype.textContent = types[currentImageIndex];
+                currentsize.textContent = sizes[currentImageIndex];
+                numberDivRMB.value = prices[currentImageIndex];
+
+                var currentNumberRMB = parseInt(numberDivRMB.value, 10);
+                // 更新div的内容
+                numberDivRMB.value = currentNumberRMB;
+                prices[currentImageIndex] = currentNumberRMB;
+                numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
+                numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
+                numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
+
+
+                break;
+            case 'ArrowRight':
+                // 处理右箭头键的逻辑
+                // 切换到上一张图片
+                currentImageIndex = (currentImageIndex + 1 + images.length) % images.length;
+                currentImage.src = images[currentImageIndex];
+                currenttitle.textContent = titles[currentImageIndex];
+                currentname.textContent = names[currentImageIndex];
+                currentauthor.textContent = authors[currentImageIndex];
+                currenttype.textContent = types[currentImageIndex];
+                currentsize.textContent = sizes[currentImageIndex];
+                numberDivRMB.value = prices[currentImageIndex];
+
+                var currentNumberRMB = parseInt(numberDivRMB.value, 10);
+                // 更新div的内容
+                numberDivRMB.value = currentNumberRMB;
+                prices[currentImageIndex] = currentNumberRMB;
+                numberDivHKD.textContent = Math.round(currentNumberRMB * 1.08);
+                numberDivUSD.textContent = Math.round(currentNumberRMB * 0.138);
+                numberDivEUR.textContent = Math.round(currentNumberRMB * 0.1289);
+                break;
+            case 'End':
+                // 切换div的显示状态
+                // 获取div元素
+                var toggleDiv = document.getElementById('reportDiv');
+                var isVisible = false; // 用于追踪div的显示状态
+                generateTable();
+                if (toggleDiv.style.display === 'none') {
+                    toggleDiv.style.display = 'block';
+                } else {
+                    toggleDiv.style.display = 'none';
+                }
+                break;
+        }
+    });
+    window.addEventListener('beforeunload', function (e) {
+        // 取消默认的确认对话框
+        (e || window.event).returnValue = false;
+
+        // 你可以在这里执行一些操作，比如保存草稿或提醒用户
+        // 例如，保存草稿到本地存储
+        localStorage.setItem('draft', '这里是草稿内容');
+
+        // Chrome 37+ 需要一个字符串来触发一个确认对话框
+        return "您有未保存的更改，确定要离开吗？";
+    });
+    function updateTime() {
+        var now = new Date(); // 创建一个Date对象，表示当前时间
+        var year = now.getFullYear(); // 获取年份
+        var month = now.getMonth() + 1; // 获取月份，getMonth()返回的月份是从0开始的
+        var day = now.getDate(); // 获取日期
+        var dayOfWeek = now.getDay(); // 获取星期几，0是星期天
+        var hours = now.getHours(); // 获取小时
+        var minutes = now.getMinutes(); // 获取分钟
+        var seconds = now.getSeconds(); // 获取秒
+
+        // 星期几的数组
+        var daysOfWeek = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+
+        // 将小时转换为12小时制，并添加上午或下午的前缀
+        var amPm = hours >= 12 ? '下午' : '上午';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // 将0小时转换为12小时
+
+        // 将分钟和秒数格式化为两位数
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        seconds = seconds < 10 ? '0' + seconds : seconds;
+
+        // 将时间组件组合成字符串
+        var timeString = year + "年" + month + "月" + day + "日 " + daysOfWeek[dayOfWeek] + " " + amPm + " " + hours + ":" + minutes + ":" + seconds;
+
+        // 将时间字符串设置到页面的某个元素中
+        document.getElementById('clock').textContent = timeString;
+    }
+
+    // 第一次调用updateTime来初始化时间显示
+    updateTime();
+
+    // 每1000毫秒（1秒）调用一次updateTime来更新时间
+    setInterval(updateTime, 1000);
+
+    // 动态生成表格行的函数
+    function generateTable() {
+        var tableBody = document.getElementById('artworkTable').querySelector('tbody');
+        // 清除现有行
+        tableBody.innerHTML = "";
+
+        // 遍历数据并生成表格行
+        images.forEach(function (image, index) {
+            var row = `<tr>
+                    
+                    <td>${titles[index]}</td>
+                    <td>${names[index]}</td>
+                    <td>${authors[index]}</td>
+                    <td>${types[index]}</td>
+                    <td>${sizes[index]}</td>
+                    <td>${prices[index]}</td>
+                </tr>`;
+            tableBody.innerHTML += row; // 将新行添加到表格主体
+        });
+    }
+
+    // 页面加载完成后生成表格
+    document.addEventListener('DOMContentLoaded', generateTable);
+
+</script>
+
+</html>
