@@ -2,65 +2,54 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>艺术品报表</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        img {
-            width: 100px;
-            height: auto;
-        }
-    </style>
+    <title>Test auction258 Function</title>
 </head>
 <body>
-
-
     <script>
-        // 你的数据变量
-        var images = ['images/1.jpg', 'images/2.jpg', 'images/3.jpg'];
-        var titles = ['LOT 001', 'LOT 002', 'LOT 003'];
-        var names = ['济南山水', '花花草草', '地球村'];
-        var authors = ['徐悲鸿', '周玮佳', '达芬奇'];
-        var types = ['纸本水墨', '综合', '油画'];
-        var sizes = ['一米', '一纳米', '一光年'];
-        var prices = ['300', '50000', '50'];
+        // 定义 auction258 函数
+        function auction258(number) {
+            var n = number.toString().length;
+            console.log("n = " + n);
+            if (n<2 ) return number+1;
+            var t = Math.floor(number / (10 ** (n - 2)));
+            console.log("t = " + t);
+            var st = String(t);
+            
+            if (st.endsWith('0')) {
+                t = t + 2;
+            } else if (st.endsWith('1')) {
+                t = t + 1;
+            } else if (st.endsWith('2')) {
+                t = t + 3;
+            } else if (st.endsWith('3')) {
+                t = t + 2;
+            } else if (st.endsWith('4')) {
+                t = t + 1;
+            } else if (st.endsWith('5')) {
+                t = t + 3;
+            } else if (st.endsWith('6')) {
+                t = t + 2;
+            } else if (st.endsWith('7')) {
+                t = t + 1;
+            } else if (st.endsWith('8')) {
+                t = t + 2;
+            } else if (st.endsWith('9')) {
+                t = t + 1;
+            }
+            return t * (10 ** (n - 2));
+        }
 
-        // 动态生成表格行的函数
-        function generateTable() {
-            var tableBody = document.getElementById('artworkTable').querySelector('tbody');
-            // 清除现有行
-            tableBody.innerHTML = "";
-
-            // 遍历数据并生成表格行
-            images.forEach(function(image, index) {
-                var row = `<tr>
-                    <td><img src="${image}" alt="${names[index]}" class="table-image"></td>
-                    <td>${titles[index]}</td>
-                    <td>${names[index]}</td>
-                    <td>${authors[index]}</td>
-                    <td>${types[index]}</td>
-                    <td>${sizes[index]}</td>
-                    <td>${prices[index]}</td>
-                </tr>`;
-                tableBody.innerHTML += row; // 将新行添加到表格主体
+        // 测试函数
+        function testAuction258() {
+            var testNumbers = [1,2,3,4,5,16,32,18,90,11,100, 220, 330, 440, 550, 600, 760, 890, 900, 1080];
+            testNumbers.forEach(function(testNumber) {
+                var result = auction258(testNumber);
+                console.log("auction258(" + testNumber + ") = " + result);
             });
         }
 
-        // 页面加载完成后生成表格
-        document.addEventListener('DOMContentLoaded', generateTable);
+        // 调用测试函数
+        testAuction258();
     </script>
-
 </body>
 </html>
